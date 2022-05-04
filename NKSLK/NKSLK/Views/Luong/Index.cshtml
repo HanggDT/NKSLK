@@ -1,0 +1,82 @@
+﻿@using PagedList.Mvc
+
+@model PagedList.IPagedList<NKSLK.Models.Entities.v_Luong>
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<form action="@Url.Action("Index", "Luong")" role="form" method="post" enctype="multipart/form-data">
+
+    <div class="row">
+        <div class="col-md-12" style="display:flex">
+            <div class="row">
+                <div class="" style="margin-right: 40px;margin-left:10px">
+                    <label>Ngày thực hiện khoán</label>
+                    <input type="date" class="form-control" name="date" placeholder="Nhập ngày đăng ký" value="@ViewBag.date">
+                </div>
+            </div>
+            <div style="display:table-caption" class="form-group">
+                <label for="exampleInputEmail1">Tùy chọn</label><br />
+                <select style="padding: 7px; border: 1px solid #ccc; border-radius: 5px;" name="value" class="dropdown-content">
+                    <option value="@Session["value"]" style="display:none"></option>
+                    <option selected value="0">Tất Cả</option>
+                    <option value="1">Theo Tuần</option>
+                    <option value="2">Theo Tháng</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="col-2">
+        <div class="btn-search">
+            <button type="submit" class="btn btn-default btn-pro" title="Search" style="background-color:darkcyan; width:90px; height:38px; color:white; margin: 0 0 20px -6px">
+                Tìm Kiếm
+            </button>
+        </div>
+    </div>
+</form>
+<div style="display:flex; justify-content:space-between">
+    <h2>Danh Sách Lương Công Nhân</h2>
+</div>
+
+<table class="table1">
+    <tr>
+        <th>
+            Mã CN
+        </th>
+        <th>
+            Họ Tên
+        </th>
+        <th>
+            Lương
+        </th>
+        <th>
+            Ngày Thực Hiện Khoán
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaCN)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HoTen)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Luong)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NgayThucHienKhoan)
+            </td>
+        </tr>
+    }
+
+</table>
+<ul class="pagination">
+    @*    Page @(Model.PageCount<Model.PageNumber? 0: Model.PageNumber) of @Model.PageCount*@
+    @Html.PagedListPager(Model, pageNum => Url.Action("Index", new { pageNum }))
+</ul>
+
+<link rel="stylesheet" href="~/Content/css/index.css">

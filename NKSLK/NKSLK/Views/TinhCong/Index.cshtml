@@ -1,0 +1,143 @@
+﻿
+@using PagedList.Mvc
+
+@model PagedList.IPagedList<NKSLK.Models.DTO.TinhCongDTO> 
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Bảng thống kê công làm  </h2>
+<div class="form-search">
+    @using (Html.BeginForm("Index", "TinhCong", FormMethod.Get, new { }))
+    {
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-2">
+                        <div class="">
+                            <input type="text" class="form-control" placeholder="Nhập tháng" name="Month" value="@ViewBag.Month">
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="">
+                            <input type="text" class="form-control" placeholder="Nhập năm" name="Year" value="@ViewBag.Year">
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="btn-search">
+                            <button type="submit" class="btn btn-default btn-pro" title="Search" style="background-color:lightgreen;width:70px; height:38px ">
+                                <i class="fa fa-search"></i>
+                            </button>
+                            <a href="~/TinhCong" class="btn btn-default btn-pro" title="Reload" style=" background-color: lightgreen;
+        width: 70px;
+        height: 38px">
+                                <i class="fas fa-sync-alt"></i>
+
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+
+<table class="table">
+    <tr>
+
+        <th>
+            Họ và tên
+        </th>
+        <th>
+            Công làm được
+        </th>
+        <th></th>
+
+    </tr>
+
+    @foreach (var item in Model)
+    {
+<tr>
+
+    <td>
+        @Html.DisplayFor(modelItem => item.HoTen)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.cong)
+    </td>
+    <td>
+        <a href="@Url.Action("Chitiet", "TinhCong", new { macn = item.MaCN })"/>
+            <label>Xem chi tiết</label>
+</td>
+
+</tr>
+    }
+
+</table>
+<ul class="pagination">
+    Page @(Model.PageCount<Model.PageNumber? 0: Model.PageNumber) of @Model.PageCount
+    @Html.PagedListPager(Model, pageNum => Url.Action("Index", new { pageNum }))
+</ul>
+<style>
+    body {
+    }
+
+    h2 {
+        color: royalblue;
+        font-family: Arial;
+        font-weight: bold;
+    }
+
+
+
+    .table {
+        width: 75%;
+    }
+
+        .table th,
+        .table td {
+            padding: 0.5rem;
+            vertical-align: top;
+            border: 1px solid #dee2e6;
+            display: table-cell;
+            text-align: center;
+            background-color: aliceblue;
+            font-family: arial, sans-serif;
+        }
+
+        .table th {
+            background-color: mediumturquoise;
+            color: aliceblue;
+        }
+
+    .pagination {
+        margin-top: 10px;
+    }
+
+        .pagination a {
+            color: black;
+            float: left;
+            padding: 12px 18px;
+            text-decoration: none;
+        }
+
+        .pagination li {
+            background-color: #e9e9e9;
+            border-radius: 5px;
+            margin-left: 4px;
+        }
+
+        .pagination .active {
+            background-color: dodgerblue;
+            color: white;
+            border-radius: 5px;
+        }
+
+        .pagination a:hover:not(.active) {
+            background-color: #ddd;
+            border-radius: 5px;
+        }
+</style>

@@ -1,0 +1,179 @@
+﻿@using PagedList.Mvc
+
+@model PagedList.IPagedList<NKSLK.Models.Entities.SAN_PHAM>
+@{
+    ViewBag.Title = "Index";
+}
+<div class="sec list-product">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12 col-right">
+                <h2>Sản phẩm</h2>
+                <div class="form-search">
+                    @using (Html.BeginForm("Index", "Sanpham", FormMethod.Get, new { }))
+                    {
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <div class="">
+                                            <input type="text" class="form-control" name="KW" placeholder="Nhập từ khóa" value="@ViewBag.KW">
+                                        </div>
+                                    </div>
+                                    <div class="col-2">
+                                        <div class="">
+                                            <input type="text" class="form-control" name="HSD" placeholder="Nhập hạn sử dụng" value="@ViewBag.HSD">
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="">
+                                            <input type="date" class="form-control" name="NDK" placeholder="Nhập ngày đăng ký" value="@ViewBag.NDK">
+                                        </div>
+                                    </div>
+                                    <div class="col-2">
+                                        <div class="btn-search">
+                                            <button type="submit" class="btn btn-default btn-pro" title="Search" style="background-color:lightgreen;width:70px; height:38px ">
+                                                <i class="fa fa-search"></i>
+                                            </button>
+                                            <a href="~/Sanpham" class="btn btn-default btn-pro" title="Reload" style=" background-color: lightgreen;
+        width: 70px;
+        height: 38px">
+                                                <i class="fas fa-sync-alt"></i>
+
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+                <p>
+                    @Html.ActionLink("Thêm mới một sản phẩm ", "Create")
+                </p>
+                @*<table class="table">
+        <tr>
+            <th>
+                Tên sản phẩm
+            </th>
+            <th>
+                Hình ảnh
+            </th>
+            <th>
+                Số đăng ký
+            </th>
+            <th>
+                Hạn sử dụng
+            </th>
+            <th>
+                Ngày đăng ký
+            </th>
+            <th>
+                Quy cách
+            </th>
+            <th>Tác vụ</th>
+        </tr>*@
+
+                <div class="box-ct">
+                    <div class="list-ct">
+                        <div class="row">
+                            @foreach (var item in Model)
+                            {
+                                <div class="col-md-3 col-sm-3 col-xs-6" style="border: 1px solid #dee2e6;">
+                                    <div class="product__item">
+                                        <div class="w">
+                                            <div class="product__image">
+                                                <a href="@Url.Action("Details", "Sanpham", new { id = item.MaSP })" class="product__link"><img src="/Content/images/@item.HinhAnh" style="width: 250px; height: 250px;" alt="name your product"></a>
+                                            </div>
+                                            <h3 class="product__name" style="font-size:21px"><a href="@Url.Action("Details", "Sanpham", new { id = item.MaSP })">@item.TenSP</a></h3>
+                                            @*<div class="product__">@item.ProStatus</div>*@
+
+                                        </div>
+
+
+                                    </div>
+
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+                @if (ViewBag.HienThi != "1")
+                {
+                    <ul class="pagination">
+                        Page @(Model.PageCount<Model.PageNumber? 0: Model.PageNumber) of @Model.PageCount
+                        @Html.PagedListPager(Model, pageNum => Url.Action("Index", new { pageNum }))
+                    </ul>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+    <style>
+        body {
+        }
+
+        h2 {
+            color: royalblue;
+            font-family: Arial;
+            font-weight: bold;
+        }
+
+        img {
+            width: 12px;
+            height: 12px;
+            margin-left: 3px;
+            margin-right: 3px;
+        }
+
+        .table {
+            width: 100%;
+        }
+
+            .table th,
+            .table td {
+                padding: 0.2rem;
+                vertical-align: top;
+                border: 1px solid #dee2e6;
+                display: table-cell;
+                text-align: center;
+                background-color: aliceblue;
+                font-family: arial, sans-serif;
+            }
+
+            .table th {
+                background-color: mediumturquoise;
+                color: aliceblue;
+            }
+
+        .pagination {
+            margin-top: 10px;
+        }
+
+            .pagination a {
+                color: black;
+                float: left;
+                padding: 12px 18px;
+                text-decoration: none;
+            }
+
+            .pagination li {
+                background-color: #e9e9e9;
+                border-radius: 5px;
+                margin-left: 4px;
+            }
+
+            .pagination .active {
+                background-color: dodgerblue;
+                color: white;
+                border-radius: 5px;
+            }
+
+            .pagination a:hover:not(.active) {
+                background-color: #ddd;
+                border-radius: 5px;
+            }
+    </style>
+
+

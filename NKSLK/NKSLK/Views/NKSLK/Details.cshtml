@@ -1,0 +1,70 @@
+﻿@model NKSLK.Models.Entities.NKSLKs
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Thông tin nhật ký sản lượng khoán</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <div class="row">
+            <dt>
+                Ngày thực hiện khoán: &nbsp;
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.NgayThucHienKhoan)
+            </dd>
+        </div>
+        <div class="row">
+            <dt>
+                Giờ bắt đầu: &nbsp;
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.GioBatDau)
+            </dd>
+        </div>
+        <div class="row">
+            <dt>
+                Giờ kết thúc: &nbsp;
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.GioKetThuc)
+            </dd>
+        </div>
+        <div class="row">
+            <dt>
+                Nhóm thực hiện khoán: &nbsp;
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.NhomThucHienKhoan)
+            </dd>
+        </div>
+        <div class="row">
+            <dt>
+                Công việc: &nbsp;
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.CongViec)
+            </dd>
+        </div>
+    </dl>
+    <div>
+        @{Html.RenderAction("cnk", "NKSLK", new { id = @ViewBag.id });}
+    </div>
+    <div>
+        @{Html.RenderAction("daumuc", "NKSLK", new { id = @ViewBag.id });}
+    </div>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.MaNK }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

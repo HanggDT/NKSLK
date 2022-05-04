@@ -1,0 +1,45 @@
+﻿@model NKSLK.Models.DTO.DauMucDTO
+@{ Layout = null;}
+
+<div>
+    <h4>Đầu mục công việc</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <div class="row">
+            <dt>
+                Tên công việc: &nbsp;
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.TenCV)
+            </dd>
+        </div>
+        <div class="row">
+            <dt>
+                Số lượng thực tế: &nbsp;
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.SLThucTe)
+            </dd>
+        </div>
+        <div class="row">
+            <dt>
+                Số lô sản phẩm: &nbsp;
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.SoLoSP)
+            </dd>
+        </div>
+        <div class="row">
+            <dt>
+                Tên sản phẩm: &nbsp;
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.TenSP)
+            </dd>
+        </div>
+    </dl>
+</div>

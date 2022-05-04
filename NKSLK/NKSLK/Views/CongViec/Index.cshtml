@@ -1,0 +1,106 @@
+﻿@using PagedList.Mvc
+
+@model PagedList.IPagedList<NKSLK.Models.Entities.CONG_VIEC>
+@{
+    ViewBag.Title = "Index";
+}
+<style>
+    .table td{
+        border: 1 px solid #dee2e6;
+    }
+</style>
+
+
+
+<h2>Danh Sách Công Việc</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Tên công việc
+        </th>
+        <th>
+            Định mức khoán
+        </th>
+        <th>
+            Đơn vị khoán
+        </th>
+        <th>
+            Hệ số khoán
+        </th>
+        <th>
+            Định mức lao động
+        </th>
+        <th>
+            Đơn giá
+        </th>
+        <td>
+        </td>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenCV)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DinhMucKhoan)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DonViKhoan)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HeSoKhoan)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DinhMucLaoDong)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DonGia)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.MaCV }) |
+                @Html.ActionLink("Details", "Details", new { id = item.MaCV }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.MaCV })
+            </td>
+        </tr>
+    }
+
+</table>
+<ul class="pagination">
+    Page @(Model.PageCount<Model.PageNumber? 0: Model.PageNumber) of @Model.PageCount
+    @Html.PagedListPager(Model, pageNum => Url.Action("Index", new { pageNum }))
+</ul>
+<style>
+    .pagination {
+        margin-top: 24px;
+    }
+
+        .pagination a {
+            color: black;
+            float: left;
+            padding: 12px 18px;
+            text-decoration: none;
+        }
+
+        .pagination li {
+            background-color: #e9e9e9;
+            border-radius: 5px;
+            margin-left: 4px;
+        }
+
+        .pagination .active {
+            background-color: dodgerblue;
+            color: white;
+            border-radius: 5px;
+        }
+
+        .pagination a:hover:not(.active) {
+            background-color: #ddd;
+            border-radius: 5px;
+        }
+</style>

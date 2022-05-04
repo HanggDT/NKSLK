@@ -1,0 +1,78 @@
+﻿@model NKSLK.Models.DTO.ACCOUNT_DTO
+
+@{
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Đăng ký</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="Clean Login Form Responsive, Login Form Web Template, Flat Pricing Tables, Flat Drop-Downs, Sign-Up Web Templates, Flat Web Templates, Login Sign-up Responsive Web Template, Smartphone Compatible Web Template, Free Web Designs for Nokia, Samsung, LG, Sony Ericsson, Motorola Web Design" />
+
+    <!-- css files -->
+
+    <link href="~/Content/Login/css/font-awesome.min.css" rel="stylesheet" type="text/css" media="all">
+    <link href="~/Content/Login/css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <!-- /css files -->
+    <!-- online fonts -->
+    <link href="//fonts.googleapis.com/css?family=Sirin+Stencil" rel="stylesheet">
+    <!-- online fonts -->
+</head>
+<body>
+    <div class="container demo-1">
+        <div class="content">
+            <div id="large-header" class="large-header">
+                <h1>Clean Login Form</h1>
+                <div class="main-agileits">
+                    <!--form-stars-here-->
+                    <div class="form-w3-agile">
+                        <h2>Register Now</h2>
+                        <form action="#" method="post">
+                            <div class="form-sub-w3">
+                                @*@Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">*@
+                                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @placeholder = "Email" } })
+                                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="icon-w3">
+                                <i class="fa fa-user" aria-hidden="true"></i>
+                            </div>
+
+
+                            <div class="form-sub-w3">
+                                @*@Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">*@
+                                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", @placeholder = "Password" } })
+                                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="icon-w3">
+                                <i class="fa fa-user" aria-hidden="true"></i>
+                            </div>
+                            <div class="form-sub-w3">
+                                @*@Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">*@
+                                @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { @class = "form-control", @placeholder = "ConfirmPassword" } })
+                                @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="icon-w3">
+                                <i class="fa fa-user" aria-hidden="true"></i>
+                            </div>
+                            <div class="clear"></div>
+                            <div class="submit-w3l">
+                                <input type="submit" value="Register">
+                            </div>
+                            <p class="p-bottom-w3ls"><a href="@Url.Action("Index", "Login")" >Back to Login</a></p>
+                        </form>
+                </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+                
+

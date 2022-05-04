@@ -1,0 +1,152 @@
+﻿@*@model IEnumerable<NKSLK.Models.Entities.CONG_VIEC>*@
+@using PagedList.Mvc
+
+@model PagedList.IPagedList<NKSLK.Models.Entities.CONG_VIEC>
+@{
+    ViewBag.Title = "Index";
+}
+
+<link rel="stylesheet" href="~/Content/css/index.css">
+
+<form action="@Url.Action("Search", "Congviec")" role="form" method="post" enctype="multipart/form-data">
+    <div style="position:relative;left:10px">
+        <div style="display:inline-block" class="form-group">
+            <label for="exampleInputEmail1">Tên công việc</label>
+            <input style="width:500px" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nhập tên công việc tìm kiếm" value="@Session["searchKey"]" name="searchKey">
+        </div>
+        <br />
+        <label for="exampleInputEmail1">Đơn giá công việc</label><br />
+        <div style="display:inline-block" class="form-group">
+            @if ((double)Session["min"] == 0)
+            {
+                <input pattern="[0-9]{0,18}" style="width:200px" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nhập từ đơn giá tối thiểu" name="min">
+            }
+            else
+            {
+                <input pattern="[0-9]{0,18}" style="width:200px" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nhập từ giá trị tối thiểu" value="@Session["min"]" name="min">
+            }
+
+        </div>
+        <div style="display:inline-block" class="form-group">
+            @if ((double)Session["max"] == 999999999999999999)
+            {
+                <input pattern="[0-9]{0,18}" style="width:200px" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nhập từ giá trị tối đa" name="max">
+            }
+            else
+            {
+                <input pattern="[0-9]{0,18}" style="width:200px" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nhập từ giá trị tối đa" value="@Session["max"]" name="max">
+            }
+        </div>
+
+
+        <div style="display:table-caption" class="form-group">
+            <label for="exampleInputEmail1">Tùy chọn đơn giá</label>
+            <select style="padding: 7px; border: 1px solid #ccc; border-radius: 5px;" name="price" class="dropdown-content">
+                <option value="@Session["price"]" style="display:none"></option>
+                <option selected value="0">Tất cả đơn giá</option>
+                <option value="@ViewBag.maxprice">Đơn giá lớn nhất</option>
+                <option value="@ViewBag.minprice">Đơn giá nhỏ nhất</option>
+                <option value="@ViewBag.avg">Đơn giá lớn hơn đơn giá trung bình</option>
+                <option value="1">Đơn giá nhỏ hơn đơn giá trung bình </option>
+            </select>
+        </div>
+        <script>
+            var formgroup = document.querySelectorAll(".form-group .dropdown-content option");
+            var selected = document.querySelector(".form-group .dropdown-content option[selected]");
+            var btn = document.querySelector('.btn-primary');
+            console.log(btn-primary);
+           @* formgroup.forEach(function (item, index) {
+                item.onclick = function () {
+                    console.log(1);
+                    selected.remove(selected);
+                    this.add(selected);
+                }
+            });
+         *@
+        </script>
+    </div>
+    <button style="position:relative; left:520px" type="submit" class="btn btn-primary"><div class="fa fa-search"></div>TÌM KIẾM</button><br /><br />
+</form>
+
+<div style="display:flex; justify-content:space-between">
+    <h2>Danh Sách Công Việc</h2>
+    <p>
+        @Html.ActionLink("Thêm mới một công việc", "Create")
+    </p>
+</div>
+
+<table class="table1">
+    <tr>
+        <th>
+            Tên công việc
+        </th>
+        <th>
+            Định mức khoán
+        </th>
+        <th>
+            Đơn vị khoán
+        </th>
+        <th>
+            Hệ số khoán
+        </th>
+        <th>
+            Định mức lao động
+        </th>
+        <th>
+            Đơn giá
+        </th>
+        <th>
+            Chức năng
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenCV)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DinhMucKhoan)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DonViKhoan)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HeSoKhoan)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DinhMucLaoDong)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DonGia)
+            </td>
+            <td>
+                <a href="@Url.Action("Edit", "Congviec", new { id = item.MaCV })">
+                    <img src="~/Content/images/edit.png" />
+                </a>
+                @* <a href="@Url.Action("Details", "Congviec", new { id = item.MaCV })">
+            <img src="~/Content/images/detail.jpg" />
+        </a>*@
+                @*<a class="btn-delete">
+            <img src="~/Content/images/delete.png" />
+        </a>*@
+                <a class="btn-delete" href="@Url.Action("Delete", "Congviec", new { id = item.MaCV })">
+            <img src="~/Content/images/delete.png" />
+        </a>
+            </td>
+        </tr>
+    }
+
+</table>
+<ul class="pagination">
+    @*  Page @(Model.PageCount<Model.PageNumber? 0: Model.PageNumber) of @Model.PageCount*@
+    @Html.PagedListPager(Model, pageNum => Url.Action("Search", new { pageNum }))
+</ul>
+<script>
+    document.querySelector('.btn-delete').onclick = function(){
+        alert('Bạn có muốn xóa công việc này');
+    }
+</script>
+
+

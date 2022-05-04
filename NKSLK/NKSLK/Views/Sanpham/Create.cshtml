@@ -1,0 +1,113 @@
+﻿@model NKSLK.Models.Entities.SAN_PHAM
+
+@{
+    ViewBag.Title = "Create";
+}
+
+@*@using (Html.BeginForm())
+    {*@
+
+
+<form action="Create" method="post" role="form" enctype="multipart/form-data">
+
+    @Html.AntiForgeryToken()
+    @*<form action="Create" method="post" role="form" enctype="multipart/form-data">
+
+        @Html.AntiForgeryToken()*@
+
+    @*<div class="form-horizontal">*@
+    <div class="sec sec__shopcart">
+        <div class="container">
+            <div class="sec__shopcart__info col-md-12 col-xs-12 col-sm-12">
+                <div class="box-user__info panel">
+                    <h2><u>Thêm thông tin sản phẩm</u></h2>
+                    <div class="content">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="row">
+                            <div class="col-md-6 col-xs-12 col-sm-6">
+                                <div class="form-group">
+                                    <div class="label">Tên sản phẩm</div>
+                                    @Html.EditorFor(model => model.TenSP, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.TenSP, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-xs-12 col-sm-6">
+                                <div class="form-group">
+                                    <label class="control-label col-md-6" for="exampleInputFile">Hình ảnh</label>
+                                    <div class="col-md-10">
+                                        <input type="file" id="photo" name="photo">
+                                        @*<p class="help-block">Chọn ảnh của sản phẩm</p>*@
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-xs-12 col-sm-6">
+                                <div class="form-group">
+                                    <div class="label">Số đăng ký</div>
+                                    @Html.EditorFor(model => model.SoDangKi, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.SoDangKi, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-xs-12 col-sm-6">
+                                <div class="form-group">
+                                    <div class="lable">Hạn sử dụng</div>
+                                    @Html.EditorFor(model => model.HanSuDung, new { htmlAttributes = new { @class = "form-control", @type = "date" } })
+                                    @Html.ValidationMessageFor(model => model.HanSuDung, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-xs-12 col-sm-6">
+                                <div class="form-group">
+                                    <div class="label">Ngày đăng ký</div>
+                                    @Html.EditorFor(model => model.NgayDangKi, new { htmlAttributes = new { @class = "form-control", @type = "date" } })
+                                    @Html.ValidationMessageFor(model => model.NgayDangKi, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-xs-12 col-sm-6">
+                                <div class="form-group">
+                                    <div class="label">Quy cách</div>
+                                    <select class="form-control" name="QuyCach">
+                                        @foreach (var item in ViewBag.cat)
+                                        {
+
+                                            <option>@item.QuyCach</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-2">
+                                <div class="form-group">
+                                    <div class="col-md-offset-3 col-md-10">
+                                        <input type="submit" value="Create" class="btn btn-primary" />
+                                    </div>
+                                </div>
+                            </div>
+                                <div class="col-2">
+                                    <a href="@Url.Action("Index", "Sanpham") " class="btn btn-primary">Back</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</form>
+@*}*@
+<style>
+    body {
+    }
+
+    h2 {
+        color: royalblue;
+        font-family: Arial;
+        font-weight: bold;
+    }
+</style>
+
+
+

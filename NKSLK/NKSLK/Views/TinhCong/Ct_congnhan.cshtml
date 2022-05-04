@@ -1,0 +1,62 @@
+﻿@{
+    Layout = null;
+}
+@model NKSLK.Models.DTO.CT_CongNhan
+<h3>Thông tin công nhân</h3>
+<div>
+    <div class="product__view__des" style="font-size:20px;color:black">
+        <label>Họ và tên:</label>
+        <span class="name">
+            @Html.DisplayFor(model => model.HoTen)
+        </span>
+    </div>
+    <div class="product__view__des" style="font-size: 20px;color: black">
+        <label>
+            Ngày sinh:
+        </label>
+        <span class="name">
+            @Html.DisplayFor(model => model.NgaySinh)
+        </span>
+    </div>
+    <div class="product__view__des" style="font-size: 20px;color: black">
+        <label>
+            Giới tính:
+        </label>
+        <span class="name">
+            @Html.DisplayFor(model => model.GioiTinh)
+        </span>
+    </div>
+    <div class="product__view__des" style="font-size:20px;color:black">
+        <label>
+            Phòng ban:
+        </label>
+        <span class="name">
+            @Html.DisplayFor(model => model.PhongBan)
+        </span>
+    </div>
+    <div class="product__view__des" style="font-size:20px;color:black">
+        <label>
+            Chức vụ:
+        </label>
+        <span class="name">
+            @Html.DisplayFor(model => model.ChucVu)
+        </span>
+    </div>
+    <div class="product__view__des" style="font-size:20px;color:black">
+        <label>
+            Quê quán:
+        </label>
+        <span class="name">
+            @Html.DisplayFor(model => model.QueQuan)
+        </span>
+    </div>
+</div>
+<style>
+    body {
+    }
+
+    h3 {
+        color: cadetblue;
+        font-family: 'Times New Roman';
+    }
+    </style>

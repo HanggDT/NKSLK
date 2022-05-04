@@ -1,0 +1,68 @@
+﻿@{ 
+    Layout = null;
+}
+@model IEnumerable<NKSLK.Models.DTO.Cong_cn>
+<h3>Thông tin  khoán </h3>
+    <table class="table">
+        <tr>
+            <th>
+                Ngày thực hiện khoán
+            </th>
+            <th>
+                Thời gian bắt đầu làm
+            </th>
+            <th>
+                Thời gian kết thúc làm
+            </th>
+        </tr>
+        @if (Model != null)
+        {
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NgayThucHienKhoan)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ThoiGianBatDau)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ThoiGianKetThuc)
+                    </td>
+                </tr>
+            }
+        }
+    </table>
+    <style>
+        body {
+        }
+
+        h3 {
+            color:cadetblue;
+            font-family:'Times New Roman';
+        }
+
+
+
+        .table {
+            width: 100%;
+        }
+
+            .table th,
+            .table td {
+                padding: 0.5rem;
+                vertical-align: top;
+                border: 1px solid #dee2e6;
+                display: table-cell;
+                text-align: center;
+                background-color: aliceblue;
+                font-family: arial, sans-serif;
+            }
+
+            .table th {
+                background-color: mediumturquoise;
+                color: aliceblue;
+            }
+    </style>
+
+

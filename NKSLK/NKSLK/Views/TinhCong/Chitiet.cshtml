@@ -1,0 +1,27 @@
+﻿
+@{
+    ViewBag.Title = "Chitiet";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2><u>Thông tin chi tiết</u></h2>
+<div class="col-md-12 col-sm-12 col-xs-12">
+    <div>
+        @{Html.RenderAction("CT_congnhan", "TinhCong", new { macn = @ViewBag.macn });}
+    </div>
+    <div>
+        @{Html.RenderAction("cn_thk", "TinhCong", new { macn = @ViewBag.macn });}
+    </div>
+    <div class="form-control" style="width:60px; height:35px ; background-color:skyblue">
+            @Html.ActionLink("Back", "Index")   
+    </div>
+</div>
+<style>
+    body {
+    }
+
+    h2 {
+        color:blue;
+        font-family: 'Times New Roman';
+    }
+</style>

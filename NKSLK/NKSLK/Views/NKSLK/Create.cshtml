@@ -1,0 +1,176 @@
+﻿@model NKSLK.Models.Entities.NKSLKs
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Thêm mới nhật ký sản lượng khoán</h2>
+<hr />
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <h4><i class="fa fa-plus" style="color:red;"></i> nhóm thực hiện khoán</h4>
+    <hr />
+    <div class="col-4">
+        <label>Số lượng thành viên</label>
+        <div class="">
+            <input type="number" min="1" class="form-control" name="sltv" placeholder="Nhập SL">
+        </div>
+    </div>
+    <hr />
+    <h4><i class="fa fa-plus" style="color:red;"></i>  công nhân khoán</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-4">
+                    <div class="form-group">
+                        <label>Công nhân</label>
+                        <select class="form-control" name="macn">
+                            @foreach (var item in ViewBag.macn)
+                            {
+                                {
+                                    <option value="@item.MaCN">@item.HoTen</option>
+                                }
+
+                            }
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-4">
+                    <div class="form-group">
+                        <label>Thời gian bắt đầu</label>
+                        <div class="">
+                            <input type="time" class="form-control" name="tgbd" placeholder="Nhập thời gian bắt đầu">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-group">
+                        <label>Thời gian kết thúc</label>
+                        <div class="">
+                            <input type="time" class="form-control" name="tgkt" placeholder="Nhập thời gian kết thúc">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        <hr />
+        <h4><i class="fa fa-plus" style="color:red;" ></i>  đầu mục công việc</h4>
+        <hr />
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-4">
+                        <div class="form-group">
+                            <label>Số lượng thực tế</label>
+                            <div class="">
+                                <input type="number" min="0" class="form-control" name="sltt" placeholder="Nhập SL thực tế">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="form-group">
+                            <label>Số lô sản phẩm</label>
+                            <div class="">
+                                <input type="number" min="0" class="form-control" name="slsp" placeholder="Nhập số lô sản phẩm">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-4">
+                        <div class="form-group">
+                            <label>Sản phẩm áp dụng</label>
+                            <select class="form-control" name="spad">
+                                @foreach (var item in ViewBag.spad)
+                                {
+                                    {
+                                        <option value="@item.MaSP">@item.TenSP</option>
+                                    }
+
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="form-group">
+                            <label>Công việc</label>
+                            <select class="form-control" name="macv">
+                                @foreach (var item in ViewBag.macv)
+                                {
+                                    {
+                                        <option value="@item.MaCV">@item.TenCV</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr />
+        <h4>Thêm nhật ký sản lượng khoán</h4>
+        <hr />
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-4">
+                        <div class="form-group">
+                            <label>Ngày thực hiện khoán</label>
+                            @Html.EditorFor(model => model.NgayThucHienKhoan, new { htmlAttributes = new { @class = "form-control", @type = "date" } })
+                            @Html.ValidationMessageFor(model => model.NgayThucHienKhoan, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                <div class="col-4">
+                    <div class="form-group">
+                        <label>Giờ bắt đầu</label>
+                        @Html.EditorFor(model => model.GioBatDau, new { htmlAttributes = new { @class = "form-control", @type = "time" } })
+                        @Html.ValidationMessageFor(model => model.GioBatDau, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="form-group">
+                    <label>Giờ kết thúc</label>
+                    @Html.EditorFor(model => model.GioKetThuc, new { htmlAttributes = new { @class = "form-control", @type = "time" } })
+                    @Html.ValidationMessageFor(model => model.GioKetThuc, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="form-group">
+    <div class="col-md-offset-2 col-md-10">
+        <button type="submit" class="btn btn-default" style="color: #048bcd;">
+            <i>Create</i>
+        </button>
+        <a href="@Url.Action("Index", "NKSLK")">
+            <button class="btn btn-default">
+                <i>Quay lại</i>
+            </button>
+        </a>
+    </div>
+</div>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+}
+    

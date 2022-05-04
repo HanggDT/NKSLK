@@ -1,0 +1,191 @@
+﻿@model PagedList.IPagedList<NKSLK.Models.Entities.NKSLKs>
+@using PagedList.Mvc
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Danh sách nhật ký sản lượng khoán</h2>
+<div class="form-search">
+    @using (Html.BeginForm("Index", "NKSLK", FormMethod.Get, new { }))
+    {
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row">
+
+                    <div class="col-2">
+                        <div class="">
+                            <input type="date" title="NKSLK theo tháng" class="form-control" name="Thang" placeholder="NKSLK theo tháng" value="@ViewBag.Thang">
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="">
+                            <input type="date" title="NKSLK theo tuần" class="form-control" name="Tuan" placeholder="NKSLK theo tuần" value="@ViewBag.Tuan">
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="">
+                            <input type="text" title="Mã công nhân" class="form-control" name="CN" placeholder="Công nhân" value="@ViewBag.CN">
+                        </div>
+                    </div>
+                    
+                    <div class="col-2">
+                        <div class="btn-search">
+                            <button type="submit" class="btn btn-default btn-pro" title="Search" style="background-color:lightgreen;width:70px; height:38px ">
+                                <i class="fa fa-search"></i>
+                            </button>
+                            <a href="~/NKSLK" class="btn btn-default btn-pro" title="Reload" style=" background-color: lightgreen;width: 70px;height: 38px">
+                                <i class="fas fa-sync-alt"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+<p></p>
+<p>
+    <a href="@Url.Action("Create", "NKSLK")" class=" filter__page-btn" style="text-decoration: none;">
+        <button style=" ">
+            <i class="fa fa-plus">Thêm mới</i>
+        </button>
+    </a>
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Ngày thực hiện khoán
+        </th>
+        <th>
+            Giờ bắt đầu
+        </th>
+        <th>
+            Giờ kết thúc
+        </th>
+        <th>
+            Nhóm TH khoán
+        </th>
+        <th>
+            Mã công việc
+        </th>
+        <th>
+            Chức năng
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NgayThucHienKhoan)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GioBatDau)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GioKetThuc)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NhomThucHienKhoan)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CongViec)
+            </td>
+            <td>
+                <a href="@Url.Action("Edit", "NKSLK", new { id = item.MaNK })" class="filter__page-btn  " style="text-decoration:none">
+
+                    <i title="Chỉnh sửa" class="page-icon fas fa-edit"></i>
+                </a>
+                <a href="@Url.Action("Details", "NKSLK", new { id = item.MaNK })">
+
+                        <i title="Chi tiết" style="color: #4D4D4D;" fill="currentColor" class="fa fa-info-circle"></i>
+
+                    </a>
+                <a href="#" onclick="XoaNK('@item.MaNK')">
+                    <i title="Xóa" style="color:#F08080; " class="fa fa-trash fa-x"></i>
+                </a>
+            </td>
+        </tr>
+    }
+
+</table>
+<script>
+    function XoaNK(id) {
+        if (confirm("Bạn muốn xóa nhật ký khoán này?") == true) {
+            $.post("/NKSLK/Delete", { "id": id }, function (data) {
+                location.href = "/NKSLK";
+            })
+        } else {
+
+        }
+    }
+</script>
+<ul class="pagination">
+    Page @(Model.PageCount<Model.PageNumber? 0: Model.PageNumber) of @Model.PageCount
+    @Html.PagedListPager(Model, pageNum => Url.Action("Index", new { pageNum }))
+</ul>
+<style>
+    body {
+    }
+
+    h2 {
+        color: #048bcd;
+        font-family: Arial;
+        font-weight: bold;
+    }
+
+    img {
+        width: 20px;
+        height: 20px;
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+
+    .table {
+        width: 100%;
+    }
+
+        .table th,
+        .table td {
+            padding: 0.5rem;
+            vertical-align: top;
+            border: 1px solid #dee2e6;
+            display: table-cell;
+            text-align: center;
+            background-color: aliceblue;
+            font-family: arial, sans-serif;
+        }
+
+        .table th {
+            background-color: #048bcd;
+            color: aliceblue;
+        }
+
+    .pagination {
+        margin-top: 10px;
+    }
+
+        .pagination a {
+            color: black;
+            float: left;
+            padding: 12px 18px;
+            text-decoration: none;
+        }
+
+        .pagination li {
+            background-color: #e9e9e9;
+            border-radius: 5px;
+            margin-left: 4px;
+        }
+
+        .pagination .active {
+            background-color: #048bcd;
+            color: white;
+            border-radius: 5px;
+        }
+
+        .pagination a:hover:not(.active) {
+            background-color: #ddd;
+            border-radius: 5px;
+        }
+</style>

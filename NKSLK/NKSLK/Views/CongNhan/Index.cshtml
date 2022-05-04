@@ -1,0 +1,239 @@
+﻿@using PagedList.Mvc
+@model PagedList.IPagedList<NKSLK.Models.Entities.CONG_NHAN>
+@{
+    ViewBag.Title = "Index";
+}
+
+
+
+
+<h2>Danh Sách Công Nhân</h2>
+<div class="form-search">
+    @using (Html.BeginForm("Index", "CongNhan", FormMethod.Get, new { }))
+    {
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-2">
+                        <div class="">
+                            <label>Từ khóa</label>
+                            <input type="text" class="form-control" name="TK" placeholder="Từ khóa" value="@ViewBag.TK">
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="">
+                            <label>Phòng ban</label>
+                            @*<input type="text" class="form-control" name="PB" placeholder="Phòng ban" value="@ViewBag.PB">*@
+                            <select class="form-control" name="PB" value="@ViewBag.PB">
+
+                                @foreach (var item in ViewBag.PB)
+                                {
+                                    <option value="@item.PhongBan" @(item.PhongBan == ViewBag.PBSelected ? "selected" : "")>@item.PhongBan</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="">
+                            <label>Chức vụ</label>
+                            @*<input type="text" class="form-control" name="CV" placeholder="Chức vụ" value="@ViewBag.CV">*@
+                            <select class="form-control" name="CV" value="@ViewBag.CV">
+
+                                @foreach (var item in ViewBag.CV)
+                                {
+                                    <option value="@item.ChucVu" @(item.ChucVu == ViewBag.CVSelected ? "selected" : "")>@item.ChucVu</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="">
+                            <label>Tuổi</label>
+                            <select style="padding: 7px; border: 1px solid #ccc; border-radius: 5px;" name="tuoi" class="dropdown-content" value="@ViewBag.Tuoi">
+                                <option value="" @(ViewBag.Tuoi == "" ? "selected" : "")></option>
+                                <option value="1" @(ViewBag.Tuoi == "1" ? "selected" : "")>Tuổi từ 30 đến 45</option>
+                                <option value="2" @(ViewBag.Tuoi == "2" ? "selected" : "")>Tuổi gần về hưu</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="">
+                            <label>Ca làm việc</label>
+                            <select style="padding: 7px; border: 1px solid #ccc; border-radius: 5px;" name="ca" class="dropdown-content" value="@ViewBag.Ca">
+                                <option value="" @(ViewBag.Ca == "" ? "selected" : "")></option>
+                                <option value="1" @(ViewBag.Ca == "1" ? "selected" : "")>Làm việc ca 3</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+
+                    <div class="col-2">
+                        <label></label>
+                        <div class="btn-search">
+                            <button type="submit" class="btn btn-default btn-pro" title="Search" style="background-color:lightgreen;width:50px; height:38px ">
+                                <i class="fa fa-search"></i>
+                            </button>
+                            <a href="~/CongNhan" class="btn btn-default btn-pro" title="Reload" style=" background-color: lightgreen;width: 50px;height: 38px">
+                                <i class="fas fa-sync-alt"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+<p>
+
+</p>
+<p>
+    <a href="@Url.Action("Create", "CongNhan")" class=" filter__page-btn" style="text-decoration: none;">
+        <button style=" ">
+            <i class="fa fa-plus">Thêm mới</i>
+        </button>
+    </a>
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Họ tên CN
+        </th>
+        <th>
+            Ngày sinh
+        </th>
+        <th>
+            Giới tính
+        </th>
+        <th>
+            Phòng ban
+        </th>
+        <th>
+            Chức vụ
+        </th>
+        <th>
+            Quê quán
+        </th>
+        <th>
+            Chức năng
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.HoTen)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NgaySinh)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GioiTinh)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PhongBan)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ChucVu)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.QueQuan)
+            </td>
+            <td>
+                <a href="@Url.Action("Edit", "CongNhan", new { id = item.MaCN })" class="filter__page-btn  " style="text-decoration:none">
+
+                    <i title="Chỉnh sửa" class="page-icon fas fa-edit"></i>
+                </a>
+                @*<a href="@Url.Action("Details", "CongNhan", new { id = item.MaCN })">
+
+                    <i title="Chi tiết" style="color: #4D4D4D;" fill="currentColor" class="fa fa-info-circle"></i>
+
+                </a>*@
+                <a href="#" onclick="XoaCN('@item.MaCN')">
+                    <i title="Xóa" style="color:#F08080; " class="fa fa-trash fa-x"></i>
+                </a>
+            </td>
+        </tr>
+    }
+
+</table>
+<script>
+    function XoaCN(id) {
+        if (confirm("Bạn muốn xóa công nhân này?") == true) {
+            $.post("/CongNhan/Delete", { "id": id }, function (data) {
+                location.href = "/CongNhan";
+            })
+        } else {
+
+        }
+    }
+</script>
+<ul class="pagination">
+    Page @(Model.PageCount<Model.PageNumber? 0: Model.PageNumber) of @Model.PageCount
+    @Html.PagedListPager(Model, pageNum => Url.Action("Index", new { pageNum }))
+</ul>
+<style>
+    body {
+    }
+
+    h2 {
+        color: #048bcd;
+        font-family: Arial;
+        font-weight: bold;
+    }
+
+    img {
+        width: 20px;
+        height: 20px;
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+
+    .table {
+        width: 100%;
+    }
+
+        .table th,
+        .table td {
+            padding: 0.5rem;
+            vertical-align: top;
+            border: 1px solid #dee2e6;
+            display: table-cell;
+            text-align: center;
+            background-color: aliceblue;
+            font-family: arial, sans-serif;
+        }
+
+        .table th {
+            background-color: #048bcd;
+            color: aliceblue;
+        }
+
+    .pagination {
+        margin-top: 24px;
+    }
+
+        .pagination a {
+            color: black;
+            float: left;
+            padding: 12px 18px;
+            text-decoration: none;
+        }
+
+        .pagination li {
+            background-color: #e9e9e9;
+            border-radius: 5px;
+            margin-left: 4px;
+        }
+
+        .pagination .active {
+            background-color: #048bcd;
+            color: white;
+            border-radius: 5px;
+        }
+
+        .pagination a:hover:not(.active) {
+            background-color: #ddd;
+            border-radius: 5px;
+        }
+</style>

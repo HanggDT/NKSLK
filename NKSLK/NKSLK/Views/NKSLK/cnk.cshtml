@@ -1,0 +1,38 @@
+﻿@model NKSLK.Models.DTO.CNKDTO
+@{ Layout = null;}
+
+<div>
+    <h4>Công nhân khoán</h4>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <div class="row">
+            <dt>
+                Họ tên CN: &nbsp;
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.HoTen)
+            </dd>
+        </div>
+        <div class="row">
+            <dt>
+                Thời gian bắt đầu: &nbsp;
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ThoiGianBatDau)
+            </dd>
+        </div>
+        <div class="row">
+            <dt>
+                Thời gian kết thúc: &nbsp;
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ThoiGianKetThuc)
+            </dd>
+        </div>
+    </dl>
+</div>
+

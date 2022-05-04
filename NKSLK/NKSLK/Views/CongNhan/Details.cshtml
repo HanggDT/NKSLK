@@ -1,0 +1,101 @@
+﻿@model NKSLK.Models.Entities.CONG_NHAN
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>THÔNG TIN CHI TIẾT CỦA CÔNG NHÂN</h2>
+
+<form>
+    <hr />
+    <dl class="dl-horizontal">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-4">
+                        <div class="form-group">
+                            <dt>
+                                @Html.DisplayNameFor(model => model.HoTen)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.HoTen)
+                            </dd>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="form-group">
+                            <dt>
+                                @Html.DisplayNameFor(model => model.NgaySinh)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.NgaySinh)
+                            </dd>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="form-group">
+                            <dt>
+                                @Html.DisplayNameFor(model => model.GioiTinh)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.GioiTinh)
+                            </dd>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                            <dt>
+                                                @Html.DisplayNameFor(model => model.PhongBan)
+                                            </dt>
+
+                                            <dd>
+                                                @Html.DisplayFor(model => model.PhongBan)
+                                            </dd>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                            <dt>
+                                                @Html.DisplayNameFor(model => model.ChucVu)
+                                            </dt>
+
+                                            <dd>
+                                                @Html.DisplayFor(model => model.ChucVu)
+                                            </dd>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                            <dt>
+                                                @Html.DisplayNameFor(model => model.QueQuan)
+                                            </dt>
+
+                                            <dd>
+                                                @Html.DisplayFor(model => model.QueQuan)
+                                            </dd>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+</dl>
+    <div class="col-4">
+        <div>
+            <a href="@Url.Action("Edit", "CongNhan", new { id = Model.MaCN })" class="filter__page-btn  ">
+                <i>Chỉnh sửa</i>
+            </a> |
+            <a href="@Url.Action("Index", "CongNhan")" class="filter__page-btn  ">
+                <i>Quay lại trang chủ</i>
+            </a>
+        </div>
+    </div>
+</form>
